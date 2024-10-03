@@ -1,11 +1,13 @@
 class Car:
-    def __init__(self, model, __vin, __numbers):
+    def __init__(self, model, vin, numbers):
         self.model = model
-        self.__vin = self.is_valid_vin (__vin)
-        self.__numbers = self.is_valid_numbers(__numbers)
+        if self.is_valid_vin(vin):
+            self.__vin = vin
+        if self.is_valid_numbers(numbers):
+            self.__numbers = numbers
 
     def is_valid_vin(self, vin_number):
-        if isinstance(vin_number, float) :
+        if not isinstance(vin_number, int):
             raise IncorrectVinNumber("Некорректный тип vin номер")
         elif 1000000 > vin_number or vin_number > 9999999:
             raise IncorrectVinNumber("Неверный диапазон для vin номера")
@@ -54,7 +56,4 @@ except IncorrectCarNumbers as exc:
   print(exc.message)
 else:
   print(f'{third.model} успешно создан')
-
-
-
 
